@@ -20,8 +20,9 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     if (error1) {
       throw error1;
     }
-    var queue = 'hello';
-    var msg = 'Hello world';
+    var queue = 'scrapes';
+    console.log(process.argv);
+    var msg = process.argv[2];
 
     channel.assertQueue(queue, {
       durable: false
