@@ -60,6 +60,9 @@ const saveScrape = function(item, done){
   });
 }
 
+const getConfigData = function(scraperId){
+ 
+})
 
 module.run = async function(){
   const browser = await puppeteer.launch();
@@ -70,11 +73,12 @@ module.run = async function(){
     if (error0) {
       throw error0;
     }
-    connection.createChannel(function(error1, channel) {
-      if (error1) {
-        throw error1;
+    connection.createChannel(function(error, channel) {
+      if (error) {
+        console.log("Error with creating channel");
+        throw error;
       }
-      var queue = 'hello';
+      var queue = 'scrapes';
 
       channel.assertQueue(queue, {
         durable: false
