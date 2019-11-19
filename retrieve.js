@@ -1,15 +1,10 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const request = require('request');
 
-module.exports = function(url) {
-    var request = new XMLHttpRequest();
-    
-    request.open("GET", url);
-    request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-            var scraper_config = JSON.parse(this.responseText)
-            return scraper_config;
-        }
-    }
-    request.send(null);
+module.exports = function(scraper, callback) {
+    const CONFIG_PATH = 'https://lagler.devicp.eu/sgrapio_api/scraper_config/'
+    request(CONFIG_PATH + scraper, { json: true }, (err, res, body) => {
+        if (err) { return console.log(err); }
+        callback(null, body);
+    });
 };
 
